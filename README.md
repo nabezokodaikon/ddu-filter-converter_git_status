@@ -16,13 +16,24 @@ https://github.com/Shougo/ddu.vim
 
 https://github.com/Shougo/ddu-ui-filer
 
+### ddu-source-file
+
+https://github.com/Shougo/ddu-source-file
+
+### ddu-column-filename
+
+https://github.com/Shougo/ddu-column-filename
+
 ## Configuration
 
 ```vim
 call ddu#start(#{
 \   ui: 'filer',
-\   sources: [#{ name: 'git_status' }],
-\   sourceOptions: [#{ converters: 'converter_git_status' }]
-\ })
+\   sources: [#{ name: 'file' }],
+\   sourceOptions: [
+\       #{ columns: 'filename' },
+\       #{ converters: 'converter_git_status' },
+\   ]
+\})
 ```
 
