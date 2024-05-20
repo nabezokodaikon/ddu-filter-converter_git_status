@@ -53,7 +53,7 @@ export class Filter extends BaseFilter<Params> {
         PathArray: pathArray,
       };
     });
-    
+
     return Promise.resolve(args.items.map(item => {
       for (let i = 0; i < dataArray.length; i++) {
         const data = dataArray[i];
@@ -64,17 +64,21 @@ export class Filter extends BaseFilter<Params> {
           if (dataPath == item.action.path) {
             item.display = item.display.replace(item.word, `[${data.Status}] ${item.word}`);
 
-            if (item.highlights.length > 0) {
-              // item.highlights.push(
-              //   {
-              //     name: "gitStatus",
-              //     hl_group: "Special",
-              //     col: item.highlights[1].col,
-              //     width: 4,
-              //   }
-              // );
-              item.highlights[1].col += 5
-            }
+            item.highlights.push(
+              {
+                name: "gitStatus",
+                hl_group: "Special",
+                col: item.__level + 3,
+                width: 4,
+              }
+            );
+
+            item.highlights.forEach(hl => {
+              if (hl.name == "column-filename-directory-name") {
+                hl.col += 5
+                return;
+              }
+            });
 
             return item;
           }
