@@ -61,24 +61,40 @@ export class Filter extends BaseFilter<Params> {
         for (let j = 0; j < data.PathArray.length; j++) {
           const dataPath = data.PathArray[j];
 
+          // if (dataPath == item.action.path) {
+          //   item.display = item.display.replace(item.word, `[${data.Status}] ${item.word}`);
+          //
+          //   item.highlights.push(
+          //     {
+          //       name: "gitStatus",
+          //       hl_group: "Special",
+          //       col: item.__level + 3,
+          //       width: 4,
+          //     }
+          //   );
+          //
+          //   item.highlights.forEach(hl => {
+          //     if (hl.name == "column-filename-directory-name") {
+          //       hl.col += 5
+          //       return;
+          //     }
+          //   });
+          //
+          //   return item;
+          // }
+
           if (dataPath == item.action.path) {
-            item.display = item.display.replace(item.word, `[${data.Status}] ${item.word}`);
+            item.display = item.display
+              .replace(item.word, `${item.word} [${data.Status}]`);
 
             item.highlights.push(
               {
                 name: "gitStatus",
                 hl_group: "Special",
-                col: item.__level + 3,
+                col: item.display.trimEnd().length - 3,
                 width: 4,
               }
             );
-
-            item.highlights.forEach(hl => {
-              if (hl.name == "column-filename-directory-name") {
-                hl.col += 5
-                return;
-              }
-            });
 
             return item;
           }
