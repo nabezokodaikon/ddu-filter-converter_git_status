@@ -55,8 +55,6 @@ export class Filter extends BaseFilter<Params> {
     });
     
     return Promise.resolve(args.items.map(item => {
-
-
       for (let i = 0; i < dataArray.length; i++) {
         const data = dataArray[i];
 
